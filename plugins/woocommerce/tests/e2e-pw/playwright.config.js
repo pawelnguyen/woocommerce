@@ -55,8 +55,16 @@ const config = {
 	},
 	projects: [
 		{
-			name: 'Chrome',
+			name: 'chrome/main',
 			use: { ...devices[ 'Desktop Chrome' ] },
+			testDir: 'tests',
+			testIgnore: '**/products/**', // Ignore 'block-editor' tests.
+		},
+		{
+			name: 'chrome/products',
+			use: { ...devices[ 'Desktop Chrome' ] },
+			testDir: 'tests/merchant/products',
+			workers: 1,
 		},
 	],
 };
