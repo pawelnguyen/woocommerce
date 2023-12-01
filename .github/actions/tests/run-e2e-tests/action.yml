@@ -33,7 +33,7 @@ runs:
           working-directory: plugins/woocommerce
           shell: bash
           run: |
-              pnpm exec playwright test --project=chrome/main \
+              pnpm exec playwright test --project=chrome-main \
               --config=tests/e2e-pw/${{ inputs.playwright-config }} \
               ${{ inputs.tests }}
 
@@ -45,7 +45,7 @@ runs:
           working-directory: plugins/woocommerce
           shell: bash
           run: |
-              pnpm exec playwright test --project=chrome/products \
+              pnpm exec playwright test --project=chrome-products \
               --config=tests/e2e-pw/${{ inputs.playwright-config }} \
               ${{ inputs.tests }}
 
