@@ -38,7 +38,7 @@ runs:
               ${{ inputs.tests }}
 
         - name: Run E2E tests on chrome-legacy-editor.
-          id: run-e2e-tests-products
+          id: run-e2e-tests-legacy-editor
           env:
               FORCE_COLOR: 1
               USE_WP_ENV: 1
@@ -50,7 +50,7 @@ runs:
               ${{ inputs.tests }}
 
         - name: Run E2E tests on chrome-new-editor.
-          id: run-e2e-tests-products
+          id: run-e2e-tests-new-editor
           env:
               FORCE_COLOR: 1
               USE_WP_ENV: 1
