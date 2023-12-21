@@ -37,7 +37,7 @@ runs:
               --config=tests/e2e-pw/${{ inputs.playwright-config }} \
               ${{ inputs.tests }}
 
-        - name: Run E2E tests on chrome-products.
+        - name: Run E2E tests on chrome-legacy-editor.
           id: run-e2e-tests-products
           env:
               FORCE_COLOR: 1
@@ -45,7 +45,19 @@ runs:
           working-directory: plugins/woocommerce
           shell: bash
           run: |
-              pnpm exec playwright test --project=chrome-products \
+              pnpm exec playwright test --project=chrome-legacy-editor \
+              --config=tests/e2e-pw/${{ inputs.playwright-config }} \
+              ${{ inputs.tests }}
+
+        - name: Run E2E tests on chrome-new-editor.
+          id: run-e2e-tests-products
+          env:
+              FORCE_COLOR: 1
+              USE_WP_ENV: 1
+          working-directory: plugins/woocommerce
+          shell: bash
+          run: |
+              pnpm exec playwright test --project=chrome-new-editor \
               --config=tests/e2e-pw/${{ inputs.playwright-config }} \
               ${{ inputs.tests }}
 
