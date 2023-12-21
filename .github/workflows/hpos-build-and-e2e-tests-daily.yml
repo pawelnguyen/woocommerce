@@ -48,7 +48,7 @@ jobs:
 
             - name: Run Playwright E2E tests on chrome-legacy-editor.
               timeout-minutes: 60
-              id: run_playwright_e2e_tests_products
+              id: run_playwright_e2e_tests_legacy_editor
               env:
                   USE_WP_ENV: 1
               working-directory: plugins/woocommerce
@@ -56,7 +56,7 @@ jobs:
 
             - name: Run Playwright E2E tests on chrome-new-editor.
               timeout-minutes: 60
-              id: run_playwright_e2e_tests_products
+              id: run_playwright_e2e_tests_new_editor
               env:
                   USE_WP_ENV: 1
               working-directory: plugins/woocommerce
