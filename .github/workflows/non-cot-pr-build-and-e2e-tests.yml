@@ -44,14 +44,23 @@ jobs:
               working-directory: plugins/woocommerce
               run: pnpm exec playwright test --project=chrome-main --config=tests/e2e-pw/playwright.config.js
 
-            - name: Run Playwright E2E tests on chrome-products.
+            - name: Run Playwright E2E tests on chrome-legacy-editor.
               timeout-minutes: 60
               id: run_playwright_e2e_tests_products
               env:
                   USE_WP_ENV: 1
                   ENABLE_HPOS: 0
               working-directory: plugins/woocommerce
-              run: pnpm exec playwright test --project=chrome-products --config=tests/e2e-pw/playwright.config.js
+              run: pnpm exec playwright test --project=chrome-legacy-editor --config=tests/e2e-pw/playwright.config.js
+
+            - name: Run Playwright E2E tests on chrome-new-editor.
+              timeout-minutes: 60
+              id: run_playwright_e2e_tests_products
+              env:
+                  USE_WP_ENV: 1
+                  ENABLE_HPOS: 0
+              working-directory: plugins/woocommerce
+              run: pnpm exec playwright test --project=chrome-new-editor --config=tests/e2e-pw/playwright.config.js
 
             - name: Generate Playwright E2E Test report.
               id: generate_e2e_report
