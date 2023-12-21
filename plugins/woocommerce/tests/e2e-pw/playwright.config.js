@@ -58,13 +58,18 @@ const config = {
 			name: 'chrome-main',
 			use: { ...devices[ 'Desktop Chrome' ] },
 			testDir: 'tests',
-			testIgnore: '**/products/**', // Ignore 'block-editor' tests.
+			testIgnore: '**/products/**', // Ignore 'product' tests.
 		},
 		{
-			name: 'chrome-products',
+			name: 'chrome-legacy-editor',
 			use: { ...devices[ 'Desktop Chrome' ] },
 			testDir: 'tests/merchant/products',
-			workers: 1,
+			testIgnore: '**/products/block-editor/**', // Ignore 'block-editor' tests.
+		},
+		{
+			name: 'chrome-new-editor',
+			use: { ...devices[ 'Desktop Chrome' ] },
+			testDir: 'tests/merchant/products/block-editor',
 		},
 	],
 };
