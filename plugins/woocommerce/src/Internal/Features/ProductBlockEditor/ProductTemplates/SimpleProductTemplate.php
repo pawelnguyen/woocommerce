@@ -777,7 +777,7 @@ class SimpleProductTemplate extends AbstractProductFormTemplate implements Produ
 				),
 			)
 		);
-		$product_inventory_inner_section = $product_inventory_section->add_section(
+		$product_inventory_inner_section = $product_inventory_section->add_subsection(
 			array(
 				'id'    => 'product-inventory-inner-section',
 				'order' => 10,
