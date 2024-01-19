@@ -4,7 +4,7 @@
 import { WooHeaderItem } from '@woocommerce/admin-layout';
 import { useEntityProp } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
-import { createElement } from '@wordpress/element';
+import { createElement, useContext } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Button, Tooltip } from '@wordpress/components';
 import { chevronLeft, group, Icon } from '@wordpress/icons';
@@ -14,11 +14,13 @@ import { recordEvent } from '@woocommerce/tracks';
 /**
  * Internal dependencies
  */
+import { EditorLoadingContext } from '../../contexts/editor-loading-context';
 import { getHeaderTitle } from '../../utils';
 import { MoreMenu } from './more-menu';
 import { PreviewButton } from './preview-button';
 import { SaveDraftButton } from './save-draft-button';
 import { PublishButton } from './publish-button';
+import { LoadingState } from './loading-state';
 import { Tabs } from '../tabs';
 import { TRACKS_SOURCE } from '../../constants';
 
@@ -36,6 +38,8 @@ export function Header( {
 	onTabSelect,
 	productType = 'product',
 }: HeaderProps ) {
+	const isEditorLoading = useContext( EditorLoadingContext );
+
 	const [ productId ] = useEntityProp< number >(
 		'postType',
 		productType,
@@ -56,8 +60,8 @@ export function Header( {
 		'name'
 	);
 
-	if ( ! productId ) {
-		return null;
+	if ( isEditorLoading ) {
+		return <LoadingState />;
 	}
 
 	const isVariation = lastPersistedProduct?.parent_id > 0;
