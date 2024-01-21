@@ -52,12 +52,12 @@ function getLayoutTemplateId(
 	productTemplate: ProductTemplate | undefined,
 	postType: string
 ) {
-	if ( productTemplate?.layoutTemplateId ) {
-		return productTemplate.layoutTemplateId;
-	}
-
 	if ( postType === 'product_variation' ) {
 		return 'product-variation';
+	}
+
+	if ( productTemplate?.layoutTemplateId ) {
+		return productTemplate.layoutTemplateId;
 	}
 
 	// Fallback to simple product if no layout template is set.
