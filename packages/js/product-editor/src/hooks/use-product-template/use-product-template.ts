@@ -29,7 +29,7 @@ export const useProductTemplate = (
 			: productTemplateId;
 
 	const productTypeToFind =
-		productType === 'variable' ? 'simple' : productType;
+		! productType || productType === 'variable' ? 'simple' : productType;
 
 	let matchingProductTemplate = productTemplates.find(
 		( productTemplate ) =>
