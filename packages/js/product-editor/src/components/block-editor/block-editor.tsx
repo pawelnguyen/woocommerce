@@ -129,7 +129,9 @@ export function BlockEditor( {
 
 	const { productTemplate } = useProductTemplate(
 		productTemplateId,
-		productType
+		postType === 'product_variation' && productId > 0
+			? 'simple'
+			: productType
 	);
 
 	const { layoutTemplate } = useLayoutTemplate(
@@ -144,7 +146,8 @@ export function BlockEditor( {
 
 	const { updateEditorSettings } = useDispatch( 'core/editor' );
 
-	const isEditorLoading = ! layoutTemplate || ! productTemplate;
+	const isEditorLoading =
+		productId < 1 || ! layoutTemplate || ! productTemplate;
 
 	useLayoutEffect( () => {
 		if ( isEditorLoading ) {
@@ -155,6 +158,8 @@ export function BlockEditor( {
 			[],
 			layoutTemplate.blockTemplates
 		);
+
+		console.log( 'blockInstances', blockInstances );
 
 		onChange( blockInstances, {} );
 
