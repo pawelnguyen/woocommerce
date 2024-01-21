@@ -159,8 +159,6 @@ export function BlockEditor( {
 			layoutTemplate.blockTemplates
 		);
 
-		console.log( 'blockInstances', blockInstances );
-
 		onChange( blockInstances, {} );
 
 		updateEditorSettings( {
