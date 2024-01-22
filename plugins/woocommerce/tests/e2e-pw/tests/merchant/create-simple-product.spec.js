@@ -6,10 +6,10 @@ const nonVirtualProductName = 'Non Virtual Product Name';
 const productPrice = '9.99';
 const salePrice = '6.99';
 const productDescription = 'Virtual product description.';
-const productSKU = '1234567890'
-const productPurchaseNote = 'Virtual product purchase note'
-const productAttribute = 'color'
-const productAttributeColor = 'red | white'
+const productSKU = '1234567890';
+const productPurchaseNote = 'Virtual product purchase note';
+const productAttribute = 'color';
+const productAttributeColor = 'red | white';
 let shippingZoneId, virtualProductId, nonVirtualProductId;
 
 test.describe.serial( 'Add New Simple Product Page', () => {
@@ -68,6 +68,10 @@ test.describe.serial( 'Add New Simple Product Page', () => {
 
 		// Fill in a product description
 		await page
+			.getByRole( 'button', { name: 'Visual', exact: true } )
+			.first()
+			.click();
+		await page
 			.frameLocator( '#content_ifr' )
 			.locator( '.wp-editor' )
 			.fill( productDescription );
@@ -78,15 +82,24 @@ test.describe.serial( 'Add New Simple Product Page', () => {
 
 		// Fill in purchase note
 		await page.getByText( 'Advanced' ).click();
-		await page.locator( '#_purchase_note' ).fill( productPurchaseNote );
+		await page.getByLabel( 'Purchase note' ).fill( productPurchaseNote );
+
+		// await page.locator( '#_purchase_note' ).fill( productPurchaseNote );
 
 		// Fill in a color as attribute
 		await page
 			.locator( '.attribute_tab' )
-			.getByRole( 'link', { name: 'Attributes' } ).click();
-		await page.getByPlaceholder ( 'f.e. size or color' ).fill( productAttribute );
-		await page.getByPlaceholder ( 'Enter some descriptive text. Use “|” to separate different values.' ).fill( productAttributeColor );
-		await page.keyboard.press('Enter');
+			.getByRole( 'link', { name: 'Attributes' } )
+			.click();
+		await page
+			.getByPlaceholder( 'f.e. size or color' )
+			.fill( productAttribute );
+		await page
+			.getByPlaceholder(
+				'Enter some descriptive text. Use “|” to separate different values.'
+			)
+			.fill( productAttributeColor );
+		await page.keyboard.press( 'Enter' );
 		await page.getByRole( 'button', { name: 'Save attributes' } ).click();
 
 		// Publish the product after a short wait
@@ -120,7 +133,9 @@ test.describe.serial( 'Add New Simple Product Page', () => {
 		await page.goto( `/?post_type=product&p=${ virtualProductId }`, {
 			waitUntil: 'networkidle',
 		} );
-		await expect( page.getByRole('heading', { name: virtualProductName }) ).toBeVisible();
+		await expect(
+			page.getByRole( 'heading', { name: virtualProductName } )
+		).toBeVisible();
 		await expect( page.getByText( productPrice ).first() ).toBeVisible();
 		await page.getByRole( 'button', { name: 'Add to cart' } ).click();
 		await page.getByRole( 'link', { name: 'View cart' } ).click();
@@ -176,7 +191,9 @@ test.describe.serial( 'Add New Simple Product Page', () => {
 		await page.goto( `/?post_type=product&p=${ nonVirtualProductId }`, {
 			waitUntil: 'networkidle',
 		} );
-		await expect( page.getByRole( 'heading', { name: nonVirtualProductName } ) ).toBeVisible();
+		await expect(
+			page.getByRole( 'heading', { name: nonVirtualProductName } )
+		).toBeVisible();
 		await expect( page.getByText( productPrice ).first() ).toBeVisible();
 		await page.getByRole( 'button', { name: 'Add to cart' } ).click();
 		await page.getByRole( 'link', { name: 'View cart' } ).click();
