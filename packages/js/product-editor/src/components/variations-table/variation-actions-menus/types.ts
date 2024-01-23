@@ -24,6 +24,7 @@ export type VariationQuickUpdateSlotProps = {
 
 export type MenuItemProps = {
 	children?: React.ReactNode;
+	isCustomGroup?: boolean;
 	order?: number;
 	group?: string;
 	supportsMultipleSelection?: boolean;
