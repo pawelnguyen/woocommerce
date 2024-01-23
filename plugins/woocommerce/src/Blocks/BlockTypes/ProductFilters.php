@@ -1,7 +1,7 @@
 <?php
 namespace Automattic\WooCommerce\Blocks\BlockTypes;
 
-use Automattic\WooCommerce\Internal\ProductQueryFilters\FilterData;
+use Automattic\WooCommerce\Internal\ProductQueryFilters\FilterDataProvider;
 
 /**
  * Product Filters Block.
@@ -168,7 +168,7 @@ final class ProductFilters extends AbstractBlock {
 			'rating_counts'       => null,
 		);
 
-		$filters = wc_get_container()->get( FilterData::class );
+		$filters = wc_get_container()->get( FilterDataProvider::class );
 
 		if ( ! empty( $block->context['query'] ) && ! $block->context['query']['inherit'] ) {
 			$query_vars = build_query_vars_from_query_block( $block, 1 );
