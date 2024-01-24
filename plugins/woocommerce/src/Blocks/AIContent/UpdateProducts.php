@@ -197,9 +197,9 @@ class UpdateProducts {
 		$image_alt        = $product_data['title'];
 		$product_image_id = $this->product_image_upload( $product->get_id(), $image_src, $image_alt );
 
-		if ( is_wp_error( $product_image_id ) ) {
-			return new \WP_Error( 'error_uploading_image', $product_image_id->get_error_message() );
-		}
+		// if ( is_wp_error( $product_image_id ) ) {
+		// return new \WP_Error( 'error_uploading_image', $product_image_id->get_error_message() );
+		// }
 
 		$saved_product = $this->product_update( $product, $product_image_id, $product_data['title'], $product_data['description'], $product_data['price'] );
 
@@ -298,9 +298,9 @@ class UpdateProducts {
 
 		$product_image_id = $this->product_image_upload( $product->get_id(), $ai_generated_product_content['image']['src'], $ai_generated_product_content['image']['alt'] );
 
-		if ( is_wp_error( $product_image_id ) ) {
-			return new \WP_Error( 'error_uploading_image', $product_image_id->get_error_message() );
-		}
+		// if ( is_wp_error( $product_image_id ) ) {
+		// return new \WP_Error( 'error_uploading_image', $product_image_id->get_error_message() );
+		// }
 
 		$this->product_update( $product, $product_image_id, $ai_generated_product_content['title'], $ai_generated_product_content['description'], $ai_generated_product_content['price'] );
 	}
@@ -500,7 +500,10 @@ class UpdateProducts {
 			return new WP_Error( 'invalid_product', __( 'Invalid product.', 'woocommerce' ) );
 		}
 
-		$product->set_image_id( $product_image_id );
+		if ( ! is_wp_error( $product_image_id ) ) {
+			$product->set_image_id( $product_image_id );
+		}
+		// $product->set_image_id( $product_image_id );
 		$product->set_name( $product_title );
 		$product->set_description( $product_description );
 		$product->set_price( $product_price );
